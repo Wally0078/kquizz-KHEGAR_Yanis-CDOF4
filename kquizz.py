@@ -1,31 +1,22 @@
-def run_quiz(questions, choices, answers):
+def run_quiz(questions):
     score = 0
-    for i in range(len(questions)):
-        print(questions[i])
-        for choice in choices[i]:
-            print(choice)
-        user_answer = int(input("Enter the number of your answer: "))
-        if user_answer == answers[i]:
+    for question in questions:
+        print(question["question"])
+        for i, choice in enumerate(question["choices"], start=1):
+            print(f"{i}. {choice}")
+        answer = input("Enter the number of your answer: ")
+        if question["choices"][int(answer) - 1] == question["answer"]:
             print("Correct!")
             score += 1
         else:
             print("Wrong!")
         print()
-    
     print(f"Your total score is {score}/{len(questions)}")
-
+ 
 questions = [
-    "What is the capital of France?",
-    "Which language is primarily used for Android app development?",
-    "What does HTML stand for?"
+    {"question": "What is the capital of France?", "choices": ["Paris", "London", "Berlin", "Madrid"], "answer": "Paris"},
+    {"question": "Which language is primarily used for Android app development?", "choices": ["Java", "Swift", "Kotlin", "JavaScript"], "answer": "Kotlin"},
+    {"question": "What does HTML stand for?", "choices": ["Hyper Text Markup Language", "High Text Machine Language", "Hyper Tabular Markup Language", "None of the above"], "answer": "Hyper Text Markup Language"}
 ]
-
-choices = [
-    ["1. Paris", "2. London", "3. Berlin", "4. Madrid"],
-    ["1. Java", "2. Swift", "3. Kotlin", "4. JavaScript"],
-    ["1. Hyper Text Markup Language", "2. High Text Machine Language", "3. Hyper Tabular Markup Language", "4. None of the above"]
-]
-
-answers = [1, 3, 1]
-
-run_quiz(questions, choices, answers)
+ 
+run_quiz(questions)
